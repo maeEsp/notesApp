@@ -23,3 +23,11 @@ The Notes Manager is a simple application for creating, viewing, editing, and de
 | `id`           |  
 | `title`        |  
 | `content`      |  
+
+---
+
+## Developers
+- Beatrice Jan Arapoc
+- Mae Angela Espera
+- Joash Miguel Lim
+- Karl Justin Angelo Natividad
