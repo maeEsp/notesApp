@@ -18,11 +18,13 @@ The Notes Manager is a simple application for creating, viewing, editing, and de
 
 ## Database Structure  
 
-| **Field Name** |  
+| **Note** |  
 |-----------------|  
 | `id`           |  
 | `title`        |  
 | `content`      |  
+| `created_at`   |
+| `updated_at`   |  
 
 ---
 
