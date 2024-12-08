@@ -10,6 +10,7 @@ const App = () => {
   const [selectedNote, setSelectedNote] = useState(null); // Note currently selected for viewing
   const [isEditing, setIsEditing] = useState(false);
 
+  // Fetch notes on initial load
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/notes/").then((res) => {
       setNotes(res.data);
@@ -17,6 +18,7 @@ const App = () => {
     });
   }, []);
 
+  // Delete a note
   const deleteNote = (id) => {
     axios.delete(`http://127.0.0.1:8000/api/notes/${id}/`).then(() => {
       const updatedNotes = notes.filter((note) => note.id !== id);
@@ -25,6 +27,7 @@ const App = () => {
     });
   };
 
+  // Search notes
   const handleSearch = (query) => {
     if (query.trim() === "") {
       setFilteredNotes(notes);
@@ -37,14 +40,46 @@ const App = () => {
     }
   };
 
+  // View a specific note
   const handleViewNote = (note) => {
     setSelectedNote(note);
     setIsEditing(false);
   };
 
+  // Go back to main screen
   const handleBack = () => {
-    setSelectedNote(null); // Return to default "AddNote"
+    setSelectedNote(null);
     setIsEditing(false);
+  };
+
+  // Save a new note
+  const handleAddNote = (newNote) => {
+    axios
+      .post("http://127.0.0.1:8000/api/notes/", newNote)
+      .then((res) => {
+        const createdNote = res.data;
+        const updatedNotes = [...notes, createdNote];
+        setNotes(updatedNotes);
+        setFilteredNotes(updatedNotes);
+      })
+      .catch((err) => {
+        console.error("Error adding note:", err);
+      });
+  };
+
+  // Save an edited note
+  const handleSaveEdit = (updatedNote) => {
+    axios
+      .put(`http://127.0.0.1:8000/api/notes/${updatedNote.id}/`, updatedNote)
+      .then(() => {
+        const updatedNotes = notes.map((note) =>
+          note.id === updatedNote.id ? updatedNote : note
+        );
+        setNotes(updatedNotes);
+        setFilteredNotes(updatedNotes);
+        setSelectedNote(updatedNote);
+        setIsEditing(false);
+      });
   };
 
   return (
@@ -63,26 +98,12 @@ const App = () => {
       <div className="w-full md:w-2/3 bg-white p-4 rounded shadow">
         {selectedNote ? (
           isEditing ? (
-            // Edit mode
             <EditNote
               note={selectedNote}
-              onSave={(updatedNote) => {
-                axios
-                  .put(`http://127.0.0.1:8000/api/notes/${updatedNote.id}/`, updatedNote)
-                  .then(() => {
-                    const updatedNotes = notes.map((note) =>
-                      note.id === updatedNote.id ? updatedNote : note
-                    );
-                    setNotes(updatedNotes);
-                    setFilteredNotes(updatedNotes);
-                    setSelectedNote(updatedNote); // Update the currently selected note with the latest changes
-                    setIsEditing(false);
-                  });
-              }}
+              onSave={handleSaveEdit}
               onCancel={() => setIsEditing(false)}
             />
           ) : (
-            // View mode with Back/Edit Buttons
             <div className="flex flex-col gap-4">
               <div className="flex justify-between items-center mb-4">
                 <button
@@ -103,8 +124,7 @@ const App = () => {
             </div>
           )
         ) : (
-          // Default view with AddNote
-          <AddNote onAddNote={(note) => setNotes([...notes, note])} />
+          <AddNote onAddNote={handleAddNote} />
         )}
       </div>
     </div>
