@@ -16,7 +16,7 @@ const EditNote = ({ note, onSave, onCancel }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative flex flex-col gap-4 p-6  "
+      className="relative flex flex-col gap-4 p-6"
       style={{
         
       }}
@@ -27,14 +27,8 @@ const EditNote = ({ note, onSave, onCancel }) => {
         value={updatedNote.title}
         onChange={handleChange}
         placeholder="Title"
-        className="border-none bg-transparent text-black w-full focus:outline-none font-handwriting"
-        style={{
-          fontFamily: "'Patrick Hand', sans-serif",
-          fontSize: "1.25rem",
-          lineHeight: "40px", // Aligns with notebook lines
-          borderBottom: "2px solid black", // Single underline for the title
-        }}
-      />
+        className="border border-black/25 p-3 rounded-md w-full focus:outline-none focus:border-[#E4AF0A] text-black"
+        />
 
       {/* Content Field */}
       <textarea
@@ -42,30 +36,22 @@ const EditNote = ({ note, onSave, onCancel }) => {
         value={updatedNote.content}
         onChange={handleChange}
         placeholder="Write your notes here..."
-        className="h-48 resize-none text-black p-2 rounded-md bg-transparent font-handwriting focus:outline-none "
-        style={{
-          fontFamily: "'Patrick Hand', sans-serif",
-          fontSize: "1rem",
-          lineHeight: "40px", // Matches notebook lines
-        }}
+        className="border border-black/25 p-3 rounded-md w-full h-64 resize-none focus:outline-none focus:border-[#E4AF0A] text-black"
       />
 
       {/* Action Buttons */}
-      <div className="flex gap-4 justify-end mt-4">
-        <Button
+      <div className="flex gap-2 justify-end">
+      <Button
           label="Save"
           type="submit"
-          className="py-2 px-4 bg-[#ffdd8b] text-black  hover:bg-yellow-200"
-        />
+          className="bg-[#E4AF0A] text-white font-normal rounded-md px-6 py-2 hover:bg-[#E4AF0A]/70 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+          />
         <Button
           label="Cancel"
           onClick={onCancel}
-          className="py-2 px-4 bg-gray-500 text-white border-2  hover:bg-gray-600"
-        />
+          className="bg-red-600 text-white font-normal rounded-md px-6 py-2 hover:bg-red-600/70 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          />
       </div>
-
-      {/* Optional: Top and Bottom Notebook Effects */}
-     
     </form>
   );
 };

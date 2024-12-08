@@ -19,7 +19,7 @@ const NoteList = ({ notes, onDelete, onUpdate }) => {
             <Button
               label="Edit"
               onClick={() => onUpdate(note)}
-              className="bg-blue-500 text-white hover:bg-blue-600 border-2 border-black"
+              className="bg-blue-400 text-white hover:bg-blue-600 border-2 border-black"
             />
           </div>
         </div>

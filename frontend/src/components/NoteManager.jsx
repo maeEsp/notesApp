@@ -1,26 +1,19 @@
-import SearchBar from "./SearchBar";
 import Button from "./Button";
 
-const NoteManager = ({ notes, onDelete, onViewNote, onSearch }) => {
+const NoteManager = ({ notes, onDelete, onViewNote }) => {
   return (
-    <div className="w-full">
-      {/* Title "Notes" */}
-      <h2 className="text-3xl font-bold text-center text-black mb-4">Notes</h2>
-
-      {/* Search Bar */}
-      <SearchBar onSearch={onSearch} />
-
+    <div className="w-full ">
       {/* List of Notes */}
-      <div className="mt-4 space-y-4">
+      <div>
         {notes.map((note) => (
           <div
             key={note.id}
-            className="flex items-center justify-between border-b py-3 px-2 cursor-pointer hover:bg-yellow-100 transition-colors duration-200 ease-in-out"
+            className="first:rounded-t-lg last:rounded-b-lg flex items-center justify-between border-b py-6 px-4 cursor-pointer hover:bg-[#E4AF0A]/70 transition-colors duration-200 ease-in-out"
             onClick={() => onViewNote(note)}
           >
             <div>
               <h3 className="text-black text-lg font-semibold">{note.title}</h3>
-              <p className="text-black text-sm">{note.content.slice(0, 30)}...</p>
+              <p className="text-black text-sm">{note.content.slice(0, 100)}...</p>
             </div>
             <div className="flex gap-2">
             <Button
