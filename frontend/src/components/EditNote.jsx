@@ -16,34 +16,56 @@ const EditNote = ({ note, onSave, onCancel }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 bg-white shadow-md p-4 rounded-md"
+      className="relative flex flex-col gap-4 p-6  "
+      style={{
+        
+      }}
     >
+      {/* Title Field */}
       <input
         name="title"
         value={updatedNote.title}
         onChange={handleChange}
         placeholder="Title"
-        className="border p-2 rounded-md"
+        className="border-none bg-transparent text-black w-full focus:outline-none font-handwriting"
+        style={{
+          fontFamily: "'Patrick Hand', sans-serif",
+          fontSize: "1.25rem",
+          lineHeight: "40px", // Aligns with notebook lines
+          borderBottom: "2px solid black", // Single underline for the title
+        }}
       />
+
+      {/* Content Field */}
       <textarea
         name="content"
         value={updatedNote.content}
         onChange={handleChange}
-        placeholder="Content"
-        className="border p-2 rounded-md h-[700px]"
+        placeholder="Write your notes here..."
+        className="h-48 resize-none text-black p-2 rounded-md bg-transparent font-handwriting focus:outline-none "
+        style={{
+          fontFamily: "'Patrick Hand', sans-serif",
+          fontSize: "1rem",
+          lineHeight: "40px", // Matches notebook lines
+        }}
       />
-      <div className="flex gap-2 mt-2">
+
+      {/* Action Buttons */}
+      <div className="flex gap-4 justify-end mt-4">
         <Button
           label="Save"
           type="submit"
-          className="bg-blue-500 text-white hover:bg-blue-600"
+          className="py-2 px-4 bg-[#ffdd8b] text-black  hover:bg-yellow-200"
         />
         <Button
           label="Cancel"
           onClick={onCancel}
-          className="bg-gray-500 text-white hover:bg-gray-600"
+          className="py-2 px-4 bg-gray-500 text-white border-2  hover:bg-gray-600"
         />
       </div>
+
+      {/* Optional: Top and Bottom Notebook Effects */}
+     
     </form>
   );
 };
