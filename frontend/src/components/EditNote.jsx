@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import Button from "./Button";
 
 const EditNote = ({ note, onSave, onCancel }) => {
   const [updatedNote, setUpdatedNote] = useState({ ...note });
@@ -30,15 +30,19 @@ const EditNote = ({ note, onSave, onCancel }) => {
         value={updatedNote.content}
         onChange={handleChange}
         placeholder="Content"
-        className="border p-2 rounded-md h-32"
+        className="border p-2 rounded-md h-[700px]"
       />
       <div className="flex gap-2 mt-2">
-        <button className="bg-blue-500 text-white px-4 py-1 rounded" type="submit">
-          Save
-        </button>
-        <button className="bg-gray-500 text-white px-4 py-1 rounded" type="button" onClick={onCancel}>
-          Cancel
-        </button>
+        <Button
+          label="Save"
+          type="submit"
+          className="bg-blue-500 text-white hover:bg-blue-600"
+        />
+        <Button
+          label="Cancel"
+          onClick={onCancel}
+          className="bg-gray-500 text-white hover:bg-gray-600"
+        />
       </div>
     </form>
   );

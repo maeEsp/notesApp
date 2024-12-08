@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./Button";
 
 const AddNote = ({ onAddNote }) => {
   const [title, setTitle] = useState("");
@@ -16,16 +17,15 @@ const AddNote = ({ onAddNote }) => {
   };
 
   return (
-    <div>
+    <div className="">
       {!isEditing ? (
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+        <Button
+          label="Add Note"
           onClick={() => setIsEditing(true)}
-        >
-          Add Note
-        </button>
+          className="bg-green-500 text-white hover:bg-green-600"
+        />
       ) : (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 h-full">
           <input
             placeholder="Title"
             value={title}
@@ -36,21 +36,19 @@ const AddNote = ({ onAddNote }) => {
             placeholder="Content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="border p-2 rounded h-32"
+            className="border p-2 rounded h-[700px]"
           />
           <div className="flex gap-2">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            <Button
+              label="Save"
               onClick={handleSave}
-            >
-              Save
-            </button>
-            <button
-              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+              className="bg-blue-500 text-white hover:bg-blue-600"
+            />
+            <Button
+              label="Cancel"
               onClick={() => setIsEditing(false)}
-            >
-              Cancel
-            </button>
+              className="bg-gray-500 text-white hover:bg-gray-600"
+            />
           </div>
         </div>
       )}
